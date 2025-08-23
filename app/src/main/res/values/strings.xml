@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">PetNutritionistApp</string>
+
+    <string-array name="ribs_array">
+        <item>清楚可摸到肋骨</item>
+        <item>需按壓才摸到</item>
+        <item>摸不到肋骨</item>
+    </string-array>
+
+    <string-array name="waist_array">
+        <item>腰身明顯</item>
+        <item>腰身略可見</item>
+        <item>無腰身</item>
+    </string-array>
+
+    <string-array name="stomach_array">
+        <item>腹部上提</item>
+        <item>腹部平坦</item>
+        <item>腹部下垂</item>
+    </string-array>
+    <string name="photo_instruction">拍攝狗狗並描述觸感</string>
+    <string name="take_photo">拍照</string>
+    <string name="analyze_bcs">確認分析</string>
+    <string name="photo_preview_desc">狗狗照片預覽</string>
+    <string name="ribs_label">肋骨觸感：</string>
+    <string name="waist_label">腰部線條：</string>
+    <string name="stomach_label">腹部輪廓：</string>
+
+    <!-- Login 畫面用字串 -->
+    <string name="welcome">歡迎</string>
+    <string name="email">Email</string>
+    <string name="password">密碼</string>
+    <string name="login">登入</string>
+    <string name="register">註冊</string>
+
+
+
+
+
+        <!-- 畫面標題 -->
+        <string name="app_title">狗狗寵物營養師</string>
+
+        <!-- 三個主要按鈕 -->
+        <string name="know_bcs">認識 BCS</string>
+        <string name="start_analyze">開始分析狗狗</string>
+        <string name="find_nearby_vet">查看附近的寵物醫院</string>
+
+        <!-- 左下角黑色按鈕 & 無障礙描述 -->
+        <string name="ai_advisor">AI 顧問</string>
+
+        <!-- 圖片／圖示的無障礙說明 -->
+        <string name="dog_image_desc">戴眼鏡的薩摩耶狗狗照片</string>
+        <string name="logout">登出</string>
+
+
+
+
+
+
+
+
+
+</resources>

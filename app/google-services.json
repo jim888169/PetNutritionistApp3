@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247304291289",
+    "project_id": "petnutritionist-f1f8d",
+    "storage_bucket": "petnutritionist-f1f8d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247304291289:android:eca9c771c3aa5cee364fc8",
+        "android_client_info": {
+          "package_name": "com.example.petnutritionistapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoqzWcz8RHP09S4--yej0gkkdIxiGv4MA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

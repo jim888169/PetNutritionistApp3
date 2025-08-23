@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/photo_instruction"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:layout_marginBottom="16dp"
+            android:background="#DDD"
+            android:contentDescription="@string/photo_preview_desc"
+            android:scaleType="centerCrop" />
+
+        <Button
+            android:id="@+id/btnTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/take_photo"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Spinner 1：肋骨 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ribs_label" />
+
+        <Spinner
+            android:id="@+id/spinnerRibs"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Spinner 2：腰部 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/waist_label" />
+
+        <Spinner
+            android:id="@+id/spinnerWaist"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Spinner 3：腹部 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stomach_label" />
+
+        <Spinner
+            android:id="@+id/spinnerStomach"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnAnalyze"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/analyze_bcs"
+            android:backgroundTint="@color/purple_200"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>
