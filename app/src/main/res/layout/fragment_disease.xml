@@ -1,11 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:paddingBottom="100dp"
+    android:clipToPadding="false">
 
-    <!-- 用 LinearLayout 包住文字內容 -->
+    <!-- 預留底部空間，避免被 BottomNavigationView 擋住 -->
+
+    <!-- 內容容器 -->
     <LinearLayout
         android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -13,7 +18,7 @@
             android:id="@+id/tvDiseaseTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="疾病資料"
+            android:text="疾病資訊"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -22,8 +27,7 @@
             android:id="@+id/tvPrevention"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="預防建議"
+            android:text="預防建議..."
             android:textSize="16sp" />
-
     </LinearLayout>
 </ScrollView>

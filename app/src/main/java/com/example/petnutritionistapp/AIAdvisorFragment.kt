@@ -4,16 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.coroutines.*
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody.Companion.create
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
-import android.util.Log
 
 class AIAdvisorFragment : Fragment() {
 
@@ -27,7 +32,7 @@ class AIAdvisorFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_ai_advisor, container, false)
 
         editInput = view.findViewById(R.id.editInput)
@@ -36,10 +41,12 @@ class AIAdvisorFragment : Fragment() {
 
         btnSend.setOnClickListener {
             val question = editInput.text.toString().trim()
-            if (question.isNotEmpty()) {
-                askAI(question)
-            } else {
+            if (question.isEmpty()) {
                 Toast.makeText(requireContext(), "請輸入問題", Toast.LENGTH_SHORT).show()
+            } else if (apiKey.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "找不到 API 金鑰，請確認 local.properties", Toast.LENGTH_SHORT).show()
+            } else {
+                askAI(question)
             }
         }
 
@@ -61,13 +68,13 @@ class AIAdvisorFragment : Fragment() {
         }
 
         val json = JSONObject().apply {
-            put("model", "gpt-3.5-turbo")
+            put("model", "gpt-3.5-turbo")   // 你的原設定，保留
             put("messages", messagesArray)
             put("temperature", 0.7)
         }
 
-        val mediaType = "application/json".toMediaType()
-        val body = create(mediaType, json.toString())
+        val body = json.toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaType())
 
         val request = Request.Builder()
             .url(url)
@@ -76,32 +83,35 @@ class AIAdvisorFragment : Fragment() {
             .post(body)
             .build()
 
-        CoroutineScope(Dispatchers.IO).launch {
+        // 用 viewLifecycleOwner.lifecycleScope 避免 Fragment lifecycle 洩漏
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             try {
-                Log.d("OpenAI", "金鑰內容：$apiKey，長度：${apiKey.length}")
+                client.newCall(request).execute().use { response ->
+                    val responseBody = response.body?.string()
+                    if (response.isSuccessful && !responseBody.isNullOrBlank()) {
+                        val content = JSONObject(responseBody)
+                            .getJSONArray("choices")
+                            .getJSONObject(0)
+                            .getJSONObject("message")
+                            .getString("content")
+                            .trim()
 
-                val response = client.newCall(request).execute()
-                val responseBody = response.body?.string()
-
-                if (response.isSuccessful && responseBody != null) {
-                    val responseJson = JSONObject(responseBody)
-                    val content = responseJson
-                        .getJSONArray("choices")
-                        .getJSONObject(0)
-                        .getJSONObject("message")
-                        .getString("content")
-
-                    withContext(Dispatchers.Main) {
-                        txtResult.text = content.trim()
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        txtResult.text = "請求失敗：${response.code}"
+                        withContext(Dispatchers.Main) {
+                            txtResult.text = content
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            txtResult.text = "請求失敗：${response.code} ${response.message}"
+                        }
                     }
                 }
             } catch (e: IOException) {
                 withContext(Dispatchers.Main) {
-                    txtResult.text = "錯誤：${e.message}"
+                    txtResult.text = "網路錯誤：${e.message ?: "unknown"}"
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    txtResult.text = "發生例外：${e.message ?: "unknown"}"
                 }
             }
         }

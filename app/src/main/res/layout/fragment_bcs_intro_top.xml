@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- 標題 -->
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
@@ -16,31 +17,32 @@
             android:text="什麼是 BCS？"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp" />
 
+        <!-- 前言說明 -->
         <TextView
             android:id="@+id/bcsIntro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="全球小動物獸醫學會（WSAVA）訂定一套體態評分系統（BCS），從過瘦到過胖以 1~9 分作為評分依據，提供飼主自行評估寵物胖瘦狀態。\n\n分數低於 4 分為偏瘦，超過 6 分要注意毛孩可能有過重問題。"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
+        <!-- 圖表 -->
         <ImageView
             android:id="@+id/bcsImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bcs_chart_wsava"
             android:adjustViewBounds="true"
-            android:contentDescription="BCS圖表"
-            android:layout_marginBottom="16dp"/>
+            android:contentDescription="BCS 圖表"
+            android:layout_marginBottom="24dp" />
 
-        <TextView
+        <!-- 下一頁按鈕：前往下半頁（分級說明） -->
+        <Button
+            android:id="@+id/btnNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:text="BCS 1：肋骨、腰椎骨、骨盆骨以及所有骨頭明顯突起，看不到脂肪，明顯肌肉流失。\n\nBCS 2：肉眼可見肋骨、腰椎骨、骨盆骨，摸不到脂肪，極少量肌肉。\n\nBCS 3：觸診不到脂肪，可清楚看到肋骨與腰椎，身體有明顯凹陷。\n\nBCS 4：肋骨上有極少脂肪包覆，由上方俯視能看到腰身，腹部凹陷明顯。\n\nBCS 5：比例良好，從背後可看到腰身，肋骨僅覆蓋少量脂肪，腹部稍微凹陷。\n\nBCS 6：肋骨上有脂肪覆蓋，腰身不明顯，腹部凹陷仍存在。\n\nBCS 7：肋骨有明顯脂肪堆積，腰椎與尾巴根部脂肪增加，腰身趨近消失。\n\nBCS 8：肋骨上厚脂肪覆蓋，腰與腹部脂肪明顯堆積，腹部變大。\n\nBCS 9：大量脂肪覆蓋胸腔與腰部，幾乎看不到腰身，脂肪堆積到頸部與四肢。" />
-
+            android:text="下一頁（分級說明）" />
     </LinearLayout>
 </ScrollView>

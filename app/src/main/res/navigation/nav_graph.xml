@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- 首頁 -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.petnutritionistapp.HomeFragment"
+        android:label="首頁">
+
+        <!-- 從首頁導到結果頁（Safe Args 用） -->
+        <action
+            android:id="@+id/action_home_to_bcsResult"
+            app:destination="@id/bcsResultFragment" />
+    </fragment>
+
+    <!-- BCS 介紹（上半頁） -->
+    <fragment
+        android:id="@+id/bcsIntroTopFragment"
+        android:name="com.example.petnutritionistapp.api.BcsIntroTopFragment"
+        android:label="BCS 介紹">
+
+        <!-- ✅ 新增：上半頁 → 下半頁 的導覽動作 -->
+        <action
+            android:id="@+id/action_bcsIntroTop_to_bcsIntroBottom"
+            app:destination="@id/bcsIntroBottomFragment" />
+    </fragment>
+
+    <!-- BCS 分級說明（下半頁） -->
+    <fragment
+        android:id="@+id/bcsIntroBottomFragment"
+        android:name="com.example.petnutritionistapp.api.BcsIntroBottomFragment"
+        android:label="BCS 分級說明" />
+
+    <!-- DogInput：填寫狗狗資料 -->
+    <fragment
+        android:id="@+id/dogInputFragment"
+        android:name="com.example.petnutritionistapp.DogInputFragment"
+        android:label="Dog Input" />
+
+    <!-- 結果頁（使用 Safe Args 接收參數） -->
+    <fragment
+        android:id="@+id/bcsResultFragment"
+        android:name="com.example.petnutritionistapp.BCSResultFragment"
+        android:label="BCS 結果">
+
+        <argument
+            android:name="score"
+            app:argType="integer" />
+
+        <argument
+            android:name="breed"
+            app:argType="string" />
+    </fragment>
+
+    <!-- AI 顧問 -->
+    <fragment
+        android:id="@+id/aiAdvisorFragment"
+        android:name="com.example.petnutritionistapp.AIAdvisorFragment"
+        android:label="AI 顧問" />
+
+</navigation>

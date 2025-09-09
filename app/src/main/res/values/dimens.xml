@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- BottomNavigationView 的高度 -->
+    <dimen name="bottom_nav_height">72dp</dimen>
+
+    <!-- 內容與底部預留空間 -->
+    <dimen name="content_bottom_inset">112dp</dimen>
+
+    <!-- 浮動按鈕往上推的距離 -->
+    <dimen name="floating_buttons_clearance">96dp</dimen>
+</resources>

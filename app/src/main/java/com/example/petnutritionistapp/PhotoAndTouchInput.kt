@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.*
@@ -11,12 +12,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petnutritionistapp.api.*
 import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.storageMetadata
-import com.google.firebase.appcheck.FirebaseAppCheck
-import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -40,7 +40,8 @@ class PhotoAndTouchInputActivity : AppCompatActivity() {
     private var uploadedImageUrl: String? = null
 
     // ===== Retrofit =====
-    private val BASE_URL = "https://asia-east1-petnutritionist-f1f8d.cloudfunctions.net/api/" // 末尾要有 /
+    private val BASE_URL =
+        "https://asia-east1-petnutritionist-f1f8d.cloudfunctions.net/api/" // 末尾要有 /
     private val api by lazy { provideApi(BASE_URL) }
 
     private fun provideApi(baseUrl: String): ApiService {
@@ -54,12 +55,20 @@ class PhotoAndTouchInputActivity : AppCompatActivity() {
         return retrofit.create(ApiService::class.java)
     }
 
-    // ===== Camera launchers =====
+    // ===== Camera launcher =====
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val bmp = result.data?.extras?.get("data") as? Bitmap
+            val extras = result.data?.extras
+            // ✅ 兼容 API 33+
+            val bmp: Bitmap? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                extras?.getParcelable("data", Bitmap::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                extras?.getParcelable("data")
+            }
+
             if (bmp != null) {
                 imgPreview.setImageBitmap(bmp)
                 // 拍完立即上傳，完成後才允許分析
@@ -112,20 +121,25 @@ class PhotoAndTouchInputActivity : AppCompatActivity() {
         spinnerStomach = findViewById(R.id.spinnerStomach)
         btnAnalyze = findViewById(R.id.btnAnalyze)
 
-        // ✅ 立刻允許拍照（不再因登入 gating）
+        // 立刻允許拍照（不再因登入 gating）
         btnTakePhoto.isEnabled = true
 
-        // （可留可拿掉）匿名登入：失敗只提示，不影響拍照
-                // 初始化下拉
-        ArrayAdapter.createFromResource(this, R.array.ribs_array, android.R.layout.simple_spinner_item).also {
+        // 初始化下拉
+        ArrayAdapter.createFromResource(
+            this, R.array.ribs_array, android.R.layout.simple_spinner_item
+        ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerRibs.adapter = it
         }
-        ArrayAdapter.createFromResource(this, R.array.waist_array, android.R.layout.simple_spinner_item).also {
+        ArrayAdapter.createFromResource(
+            this, R.array.waist_array, android.R.layout.simple_spinner_item
+        ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerWaist.adapter = it
         }
-        ArrayAdapter.createFromResource(this, R.array.stomach_array, android.R.layout.simple_spinner_item).also {
+        ArrayAdapter.createFromResource(
+            this, R.array.stomach_array, android.R.layout.simple_spinner_item
+        ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerStomach.adapter = it
         }
@@ -174,7 +188,6 @@ class PhotoAndTouchInputActivity : AppCompatActivity() {
                     }
             }
             .addOnFailureListener { e ->
-                // 顯示更完整錯誤（如果是 StorageException 會包含 httpCode 等）
                 val msg = buildString {
                     append(e.message ?: "未知錯誤")
                     if (e is StorageException) {
@@ -206,7 +219,11 @@ class PhotoAndTouchInputActivity : AppCompatActivity() {
                 dlg.dismiss()
                 val body = resp.body()
                 if (!resp.isSuccessful || body == null) {
-                    Toast.makeText(this@PhotoAndTouchInputActivity, "分析失敗：${resp.code()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@PhotoAndTouchInputActivity,
+                        "分析失敗：${resp.code()}",
+                        Toast.LENGTH_LONG
+                    ).show()
                     return
                 }
 
@@ -224,7 +241,11 @@ class PhotoAndTouchInputActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<BcsResponse>, t: Throwable) {
                 dlg.dismiss()
-                Toast.makeText(this@PhotoAndTouchInputActivity, "呼叫後端失敗：${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@PhotoAndTouchInputActivity,
+                    "呼叫後端失敗：${t.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
     }

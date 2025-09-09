@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+<style name="Avatar.Circle">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">50%</item>
+</style>
 
+<style name="Shape.RoundedImage">
+<item name="cornerFamily">rounded</item>
+<item name="cornerSize">16dp</item>
+</style>
 
-    <style name="Avatar.Circle">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
-    <!-- 一般圓角 16dp -->
-    <style name="Shape.RoundedImage">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
-    </style>
-
-
+    <!-- 這兩個是「別名」，用來接住任何 @style/Avatar 或 @style/Shape 的舊參考 -->
+<style name="Avatar" parent="Avatar.Circle" />
+<style name="Shape" parent="Shape.RoundedImage" />
 
 </resources>

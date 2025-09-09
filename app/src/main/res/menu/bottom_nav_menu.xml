@@ -1,17 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/ic_logout"
-        android:title="登出" />
 
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:title="首頁" />
-
 
     <item
         android:id="@+id/nav_back"
         android:icon="@drawable/ic_back"
-        android:title="上一頁" />
+        android:title="上一頁"
+        android:checkable="false" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="登出"
+        android:checkable="false" />
 </menu>
