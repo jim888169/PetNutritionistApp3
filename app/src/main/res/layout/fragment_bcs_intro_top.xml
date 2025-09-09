@@ -19,13 +19,14 @@
             android:textStyle="bold"
             android:layout_marginBottom="12dp" />
 
-        <!-- 前言說明 -->
+        <!-- 前言說明（修改文案） -->
         <TextView
             android:id="@+id/bcsIntro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="全球小動物獸醫學會（WSAVA）訂定一套體態評分系統（BCS），從過瘦到過胖以 1~9 分作為評分依據，提供飼主自行評估寵物胖瘦狀態。\n\n分數低於 4 分為偏瘦，超過 6 分要注意毛孩可能有過重問題。"
+            android:text="BCS（Body Condition Score，身體狀況評分）是全球小動物獸醫學會（WSAVA）常用的體態評估標準。\n\n它以 1 到 9 分衡量狗狗由過瘦到肥胖的程度，幫助飼主快速判斷毛孩是否在理想體態範圍。\n\n一般來說：\n• 1–3 分代表過瘦（肋骨與脊椎明顯）\n• 4–5 分代表理想（腰身明顯，肋骨可觸但不外露）\n• 6–9 分代表過重至肥胖（腰身不清晰，腹部下垂）\n\n若分數低於 4，代表偏瘦；超過 6，則需注意肥胖相關健康風險。"
             android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
             android:layout_marginBottom="16dp" />
 
         <!-- 圖表 -->
@@ -33,12 +34,13 @@
             android:id="@+id/bcsImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/bcs_chart_wsava"
+            android:src="@drawable/bcs_chart_wsava_new"
             android:adjustViewBounds="true"
-            android:contentDescription="BCS 圖表"
+            android:contentDescription="BCS 等級圖表（WSAVA）"
             android:layout_marginBottom="24dp" />
 
-        <!-- 下一頁按鈕：前往下半頁（分級說明） -->
+
+        <!-- 下一頁按鈕 -->
         <Button
             android:id="@+id/btnNext"
             android:layout_width="match_parent"

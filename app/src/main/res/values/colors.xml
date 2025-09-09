@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple_200">#BB86FC</color>
 
+    <color name="bcs_slim_bg">#FFF9C4</color>   <!-- 淺黃 -->
+    <color name="bcs_ideal_bg">#C8E6C9</color>  <!-- 淺綠 -->
+    <color name="bcs_over_bg">#FFCDD2</color>   <!-- 淺紅 -->
+    <color name="bcs_text_black">#000000</color>
+
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -9,39 +10,168 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- 標題（下半頁） -->
+        <!-- 標題 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BCS 分級說明"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginBottom="12dp"/>
+            android:textColor="@color/bcs_text_black"
+            android:layout_marginBottom="12dp" />
 
-        <!-- BCS 1~9 條列 -->
-        <TextView
-            android:id="@+id/tvLevels"
+        <!-- 偏瘦區塊（淺黃） -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:layout_marginBottom="24dp"
-            android:text="BCS 1：肋骨、腰椎骨、骨盆骨以及所有骨頭明顯突起，看不到脂肪，明顯肌肉流失。\n
-\nBCS 2：肉眼可見肋骨、腰椎骨、骨盆骨，摸不到脂肪，極少量肌肉。\n
-\nBCS 3：觸診不到脂肪，可清楚看到肋骨與腰椎，身體有明顯凹陷。\n
-\nBCS 4：肋骨上有極少脂肪包覆，由上方俯視能看到腰身，腹部凹陷明顯。\n
-\nBCS 5：比例良好，從背後可看到腰身，肋骨僅覆蓋少量脂肪，腹部稍微凹陷。\n
-\nBCS 6：肋骨上有脂肪覆蓋，腰身不明顯，腹部凹陷仍存在。\n
-\nBCS 7：肋骨有明顯脂肪堆積，腰椎與尾巴根部脂肪增加，腰身趨近消失。\n
-\nBCS 8：肋骨上厚脂肪覆蓋，腰與腹部脂肪明顯堆積，腹部變大。\n
-\nBCS 9：大量脂肪覆蓋胸腔與腰部，幾乎看不到腰身，脂肪堆積到頸部與四肢。" />
+            android:layout_marginBottom="16dp"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/bcs_slim_bg">
 
-        <!-- 上一頁按鈕（供 Fragment 綁定 R.id.btnPrev） -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️ 偏瘦（BCS 1–3）"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 1（極度消瘦）：肋骨、腰椎、骨盆皆明顯突起，幾乎無脂肪，肌肉明顯流失。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 2（嚴重偏瘦）：肋骨與骨盆清晰可見，脂肪極少，肌肉量不足。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 3（偏瘦）：觸診無脂肪，肋骨與腰椎明顯，體型有明顯凹陷。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 理想區塊（淺綠） -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/bcs_ideal_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="✅ 理想（BCS 4–5）"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 4（理想下限）：肋骨覆蓋極薄脂肪，腰身清楚，腹部凹陷明顯。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 5（理想）：比例勻稱，肋骨有薄脂肪覆蓋，腰身明顯，腹部微凹。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 過重/肥胖區塊（淺紅） -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/bcs_over_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🚨 過重 / 肥胖（BCS 6–9）"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 6（輕度過重）：肋骨被脂肪覆蓋，腰身不再明顯，但腹部仍稍凹。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 7（過重）：肋骨與腰椎脂肪堆積，尾根部脂肪增加，腰身趨近消失。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 8（肥胖）：肋骨與腹部有厚脂肪堆積，腰身消失，腹部膨大。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BCS 9（極度肥胖）：全身脂肪明顯堆積，胸腔與腰部無腰身，甚至延伸至頸部與四肢。"
+                    android:textSize="16sp"
+                    android:textColor="@color/bcs_text_black"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 上一頁按鈕 -->
         <Button
             android:id="@+id/btnPrev"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="上一頁（介紹與圖表）"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 </ScrollView>
